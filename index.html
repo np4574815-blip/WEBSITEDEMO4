@@ -24,27 +24,98 @@
  --text:#eaf6ff;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{overflow-x:hidden}
 body{
  background:radial-gradient(circle at top,#0b0b18,var(--bg));
  color:var(--text);
  font-family:'Inter',sans-serif;
+ overflow-x:hidden;
+}
+
+/* ===== INTRO ===== */
+#intro{
+ position:fixed; inset:0;
+ background:#050508;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ justify-content:center;
+ z-index:99999;
+ animation:introOut 1.2s ease forwards;
+ animation-delay:5.5s;
+}
+@keyframes introOut{
+ to{opacity:0; visibility:hidden}
+}
+
+.x-logo{
+ position:relative;
+ width:140px; height:140px;
+ margin-bottom:30px;
+ animation:pulseGlow 2s infinite alternate;
+ animation-delay:3s;
+}
+@keyframes pulseGlow{
+ from{filter:drop-shadow(0 0 10px var(--cyan))}
+ to{filter:drop-shadow(0 0 35px var(--purple))}
+}
+
+.beam{
+ position:absolute;
+ top:50%; left:50%;
+ width:140px; height:6px;
+ background:var(--cyan);
+ box-shadow:0 0 25px var(--cyan);
+ transform-origin:center;
+}
+.b1{
+ --r:45deg;
+ transform:translate(-50%,-50%) rotate(45deg) scaleX(0);
+ animation:draw1 1.6s ease forwards .3s;
+}
+.b2{
+ --r:-45deg;
+ transform:translate(-50%,-50%) rotate(-45deg) scaleX(0);
+ animation:draw2 1.6s ease forwards 1.1s;
+}
+@keyframes draw1{
+ to{transform:translate(-50%,-50%) rotate(45deg) scaleX(1)}
+}
+@keyframes draw2{
+ to{transform:translate(-50%,-50%) rotate(-45deg) scaleX(1)}
+}
+
+.intro-text{
+ text-align:center;
+ margin-top:20px;
+ opacity:0;
+ animation:fadeUp 1s ease forwards 3.2s;
+}
+@keyframes fadeUp{
+ to{opacity:1; transform:translateY(-6px)}
+}
+.intro-text h2{
+ font-family:'Orbitron',sans-serif;
+ letter-spacing:4px;
+}
+.intro-text p{
+ margin-top:8px;
+ font-size:.9rem;
+ color:var(--purple);
+ letter-spacing:2px;
 }
 
 /* ===== BACKGROUNDS ===== */
-#particles-js{position:fixed;inset:0;z-index:-3}
+#particles-js{position:fixed; inset:0; z-index:-3}
 
-/* Neon Grid */
 .grid-bg{
  position:fixed; inset:0; z-index:-2;
  background:
   linear-gradient(rgba(0,245,255,.08) 1px, transparent 1px),
   linear-gradient(90deg, rgba(0,245,255,.08) 1px, transparent 1px);
  background-size:40px 40px;
- mask-image:radial-gradient(circle at center, black 40%, transparent 70%);
+ mask-image:radial-gradient(circle, black 40%, transparent 70%);
 }
 
-/* Scanlines */
 .scanlines{
  position:fixed; inset:0; z-index:-1; pointer-events:none;
  background:repeating-linear-gradient(
@@ -59,89 +130,146 @@ body{
 
 /* ===== CURSOR ===== */
 .cursor{
- width:18px;height:18px;border:2px solid var(--cyan);
- border-radius:50%; position:fixed; transform:translate(-50%,-50%);
- pointer-events:none; z-index:999;
+ width:18px;height:18px;
+ border:2px solid var(--cyan);
+ border-radius:50%;
+ position:fixed;
+ transform:translate(-50%,-50%);
+ pointer-events:none;
+ z-index:999;
 }
-.cursor.active{width:46px;height:46px; box-shadow:0 0 30px var(--cyan)}
+.cursor.active{
+ width:46px;height:46px;
+ box-shadow:0 0 30px var(--cyan);
+}
 
 /* ===== HERO ===== */
 .hero{
- min-height:100vh; display:flex; flex-direction:column;
- align-items:center; justify-content:center; text-align:center;
+ min-height:100vh;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ justify-content:center;
+ text-align:center;
 }
 .glitch{
- font-family:'Orbitron',sans-serif; font-size:3.2rem; font-weight:800;
- position:relative; color:var(--cyan); text-shadow:0 0 20px var(--cyan);
+ font-family:'Orbitron',sans-serif;
+ font-size:3.2rem;
+ font-weight:800;
+ position:relative;
+ color:var(--cyan);
+ text-shadow:0 0 20px var(--cyan);
 }
 .glitch::before,.glitch::after{
- content:attr(data-text); position:absolute; left:0; top:0;
- width:100%; overflow:hidden;
+ content:attr(data-text);
+ position:absolute;
+ left:0; top:0;
+ width:100%;
 }
 .glitch::before{
- left:2px; text-shadow:-2px 0 var(--purple);
+ left:2px;
+ text-shadow:-2px 0 var(--purple);
  clip-path:polygon(0 0,100% 0,100% 45%,0 45%);
- animation:glitch 2s infinite linear alternate-reverse;
+ animation:glitch 2s infinite;
 }
 .glitch::after{
- left:-2px; text-shadow:-2px 0 var(--red);
+ left:-2px;
+ text-shadow:-2px 0 var(--red);
  clip-path:polygon(0 60%,100% 60%,100% 100%,0 100%);
- animation:glitch 1.5s infinite linear alternate-reverse;
+ animation:glitch 1.5s infinite;
 }
-@keyframes glitch{to{transform:translateY(-2px)}}
+@keyframes glitch{
+ 0%{transform:translateY(0)}
+ 50%{transform:translateY(-2px)}
+ 100%{transform:translateY(0)}
+}
 
-.hero p{margin-top:14px; max-width:650px; opacity:.85}
-
+.hero p{
+ margin-top:15px;
+ max-width:650px;
+ opacity:.85;
+}
 .btn{
- margin-top:28px; padding:14px 42px;
- border:1px solid var(--cyan); background:transparent;
- color:var(--cyan); font-family:'Orbitron',sans-serif;
- letter-spacing:2px; cursor:pointer; transition:.3s;
+ margin-top:28px;
+ padding:14px 42px;
+ border:1px solid var(--cyan);
+ background:transparent;
+ color:var(--cyan);
+ font-family:'Orbitron',sans-serif;
+ letter-spacing:2px;
+ cursor:pointer;
+ transition:.3s;
 }
-.btn:hover{background:var(--cyan); color:#000; box-shadow:0 0 30px var(--cyan)}
-
-.credit-hero{
- margin-top:14px; font-size:.85rem; opacity:.7
+.btn:hover{
+ background:var(--cyan);
+ color:#000;
+ box-shadow:0 0 30px var(--cyan);
+}
+.credit{
+ margin-top:14px;
+ font-size:.9rem;
+ opacity:.7;
 }
 
 /* ===== SECTIONS ===== */
 section{padding:110px 10%}
 .title{
- font-family:'Orbitron',sans-serif; color:var(--purple);
- font-size:2rem; margin-bottom:50px
+ font-family:'Orbitron',sans-serif;
+ color:var(--purple);
+ font-size:2rem;
+ margin-bottom:50px;
 }
 .grid{
- display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
- gap:30px
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+ gap:30px;
 }
 .card{
- padding:30px; background:rgba(255,255,255,.04);
+ padding:30px;
+ background:rgba(255,255,255,.04);
  border:1px solid rgba(0,245,255,.35);
  backdrop-filter:blur(12px);
  box-shadow:0 0 24px rgba(0,245,255,.18);
- transition:.4s
+ transition:.4s;
 }
-.card:hover{transform:translateY(-10px); box-shadow:0 0 40px var(--cyan)}
+.card:hover{
+ transform:translateY(-10px);
+ box-shadow:0 0 40px var(--cyan);
+}
 
 /* ===== TERMINAL ===== */
 .terminal{
- background:#000; border:1px solid var(--purple);
- padding:34px; font-family:'Orbitron',monospace;
- box-shadow:0 0 36px rgba(123,92,255,.6)
+ background:#000;
+ border:1px solid var(--purple);
+ padding:34px;
+ font-family:'Orbitron',monospace;
+ box-shadow:0 0 36px rgba(123,92,255,.6);
 }
 
 /* ===== FOOTER ===== */
 footer{
- text-align:center; padding:28px; opacity:.7
+ text-align:center;
+ padding:30px;
+ opacity:.75;
 }
 footer a{color:var(--cyan); text-decoration:none}
-.footer-credit{
- margin-top:8px; font-size:.9rem
-}
 </style>
 </head>
 
 <body>
+
+<!-- INTRO -->
+<div id="intro">
+ <div class="x-logo">
+  <span class="beam b1"></span>
+  <span class="beam b2"></span>
+ </div>
+ <div class="intro-text">
+  <h2>NEBULA-X STUDIO</h2>
+  <p>INITIALIZING SYSTEM…</p>
+ </div>
+</div>
+
 <div id="particles-js"></div>
 <div class="grid-bg"></div>
 <div class="scanlines"></div>
@@ -152,7 +280,9 @@ footer a{color:var(--cyan); text-decoration:none}
  <div class="glitch" data-text="NEBULA-X STUDIO">NEBULA-X STUDIO</div>
  <p>We don’t build websites. We engineer futuristic digital experiences.</p>
  <button class="btn">INITIATE PROJECT</button>
- <div class="credit-hero">Designed by <b>ABHINAV PANDEY</b> · 📞 <a href="tel:9305893662">9305893662</a></div>
+ <div class="credit">
+  Designed by <b>ABHINAV PANDEY</b> · 📞 <a href="tel:9305893662">9305893662</a>
+ </div>
 </div>
 
 <!-- SERVICES -->
@@ -178,17 +308,16 @@ footer a{color:var(--cyan); text-decoration:none}
 </section>
 
 <footer>
- © 2026 NEBULA-X STUDIO
- <div class="footer-credit">
-  Designed by <b>ABHINAV PANDEY</b> · 📞 <a href="tel:9305893662">9305893662</a>
- </div>
+ © 2026 NEBULA-X STUDIO<br>
+ Designed by <b>ABHINAV PANDEY</b> · 📞 <a href="tel:9305893662">9305893662</a>
 </footer>
 
 <script>
 /* CURSOR */
 const cursor=document.querySelector('.cursor');
 document.addEventListener('mousemove',e=>{
- cursor.style.left=e.clientX+'px'; cursor.style.top=e.clientY+'px';
+ cursor.style.left=e.clientX+'px';
+ cursor.style.top=e.clientY+'px';
 });
 document.querySelectorAll('.btn,.card,a').forEach(el=>{
  el.addEventListener('mouseenter',()=>cursor.classList.add('active'));
@@ -201,7 +330,7 @@ particlesJS("particles-js",{
   number:{value:110},
   color:{value:["#00f5ff","#7b5cff"]},
   size:{value:2},
-  line_linked:{enable:true,color:"#00f5ff",opacity:.2},
+  line_linked:{enable:true,color:"#00f5ff",opacity:.25},
   move:{speed:1}
  }
 });
@@ -211,5 +340,6 @@ gsap.registerPlugin(ScrollTrigger);
 gsap.from(".card",{scrollTrigger:".card",opacity:0,y:90,stagger:.18});
 gsap.from(".title",{scrollTrigger:".title",opacity:0,x:-80});
 </script>
+
 </body>
 </html>
