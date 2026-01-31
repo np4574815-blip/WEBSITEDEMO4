@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>NEBULA-X STUDIO | Futuristic Web Agency</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- FONTS -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+<!-- GSAP -->
+<script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+<script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
+
+<!-- PARTICLES -->
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+<style>
+:root{
+ --bg:#050508;
+ --cyan:#00f5ff;
+ --purple:#7b5cff;
+ --red:#ff2e63;
+ --text:#eaf6ff;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{overflow-x:hidden}
+body{
+ background:radial-gradient(circle at top,#0b0b18,var(--bg));
+ color:var(--text);
+ font-family:'Inter',sans-serif;
+}
+
+/* ===== BACKGROUNDS ===== */
+#particles-js{position:fixed;inset:0;z-index:-3}
+
+/* Neon Grid */
+.grid-bg{
+ position:fixed; inset:0; z-index:-2;
+ background:
+  linear-gradient(rgba(0,245,255,.08) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(0,245,255,.08) 1px, transparent 1px);
+ background-size:40px 40px;
+ mask-image:radial-gradient(circle at center, black 40%, transparent 70%);
+}
+
+/* Scanlines */
+.scanlines{
+ position:fixed; inset:0; z-index:-1; pointer-events:none;
+ background:repeating-linear-gradient(
+  to bottom,
+  rgba(255,255,255,.04),
+  rgba(255,255,255,.04) 1px,
+  transparent 1px,
+  transparent 3px
+ );
+ opacity:.12;
+}
+
+/* ===== CURSOR ===== */
+.cursor{
+ width:18px;height:18px;border:2px solid var(--cyan);
+ border-radius:50%; position:fixed; transform:translate(-50%,-50%);
+ pointer-events:none; z-index:999;
+}
+.cursor.active{width:46px;height:46px; box-shadow:0 0 30px var(--cyan)}
+
+/* ===== HERO ===== */
+.hero{
+ min-height:100vh; display:flex; flex-direction:column;
+ align-items:center; justify-content:center; text-align:center;
+}
+.glitch{
+ font-family:'Orbitron',sans-serif; font-size:3.2rem; font-weight:800;
+ position:relative; color:var(--cyan); text-shadow:0 0 20px var(--cyan);
+}
+.glitch::before,.glitch::after{
+ content:attr(data-text); position:absolute; left:0; top:0;
+ width:100%; overflow:hidden;
+}
+.glitch::before{
+ left:2px; text-shadow:-2px 0 var(--purple);
+ clip-path:polygon(0 0,100% 0,100% 45%,0 45%);
+ animation:glitch 2s infinite linear alternate-reverse;
+}
+.glitch::after{
+ left:-2px; text-shadow:-2px 0 var(--red);
+ clip-path:polygon(0 60%,100% 60%,100% 100%,0 100%);
+ animation:glitch 1.5s infinite linear alternate-reverse;
+}
+@keyframes glitch{to{transform:translateY(-2px)}}
+
+.hero p{margin-top:14px; max-width:650px; opacity:.85}
+
+.btn{
+ margin-top:28px; padding:14px 42px;
+ border:1px solid var(--cyan); background:transparent;
+ color:var(--cyan); font-family:'Orbitron',sans-serif;
+ letter-spacing:2px; cursor:pointer; transition:.3s;
+}
+.btn:hover{background:var(--cyan); color:#000; box-shadow:0 0 30px var(--cyan)}
+
+.credit-hero{
+ margin-top:14px; font-size:.85rem; opacity:.7
+}
+
+/* ===== SECTIONS ===== */
+section{padding:110px 10%}
+.title{
+ font-family:'Orbitron',sans-serif; color:var(--purple);
+ font-size:2rem; margin-bottom:50px
+}
+.grid{
+ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+ gap:30px
+}
+.card{
+ padding:30px; background:rgba(255,255,255,.04);
+ border:1px solid rgba(0,245,255,.35);
+ backdrop-filter:blur(12px);
+ box-shadow:0 0 24px rgba(0,245,255,.18);
+ transition:.4s
+}
+.card:hover{transform:translateY(-10px); box-shadow:0 0 40px var(--cyan)}
+
+/* ===== TERMINAL ===== */
+.terminal{
+ background:#000; border:1px solid var(--purple);
+ padding:34px; font-family:'Orbitron',monospace;
+ box-shadow:0 0 36px rgba(123,92,255,.6)
+}
+
+/* ===== FOOTER ===== */
+footer{
+ text-align:center; padding:28px; opacity:.7
+}
+footer a{color:var(--cyan); text-decoration:none}
+.footer-credit{
+ margin-top:8px; font-size:.9rem
+}
+</style>
+</head>
+
+<body>
+<div id="particles-js"></div>
+<div class="grid-bg"></div>
+<div class="scanlines"></div>
+<div class="cursor"></div>
+
+<!-- HERO -->
+<div class="hero">
+ <div class="glitch" data-text="NEBULA-X STUDIO">NEBULA-X STUDIO</div>
+ <p>We don’t build websites. We engineer futuristic digital experiences.</p>
+ <button class="btn">INITIATE PROJECT</button>
+ <div class="credit-hero">Designed by <b>ABHINAV PANDEY</b> · 📞 <a href="tel:9305893662">9305893662</a></div>
+</div>
+
+<!-- SERVICES -->
+<section>
+ <div class="title">WHAT WE BUILD</div>
+ <div class="grid">
+  <div class="card">⚡ Futuristic Websites</div>
+  <div class="card">🧠 AI-Ready Interfaces</div>
+  <div class="card">🌌 Premium Landing Pages</div>
+  <div class="card">🚀 High-Conversion Agency Sites</div>
+ </div>
+</section>
+
+<!-- TERMINAL -->
+<section>
+ <div class="title">SYSTEM TERMINAL</div>
+ <div class="terminal">
+  > OPERATOR: ABHINAV PANDEY<br>
+  > CONTACT: 9305893662<br>
+  > STATUS: ONLINE<br>
+  > MODE: CLIENT DOMINATION
+ </div>
+</section>
+
+<footer>
+ © 2026 NEBULA-X STUDIO
+ <div class="footer-credit">
+  Designed by <b>ABHINAV PANDEY</b> · 📞 <a href="tel:9305893662">9305893662</a>
+ </div>
+</footer>
+
+<script>
+/* CURSOR */
+const cursor=document.querySelector('.cursor');
+document.addEventListener('mousemove',e=>{
+ cursor.style.left=e.clientX+'px'; cursor.style.top=e.clientY+'px';
+});
+document.querySelectorAll('.btn,.card,a').forEach(el=>{
+ el.addEventListener('mouseenter',()=>cursor.classList.add('active'));
+ el.addEventListener('mouseleave',()=>cursor.classList.remove('active'));
+});
+
+/* PARTICLES */
+particlesJS("particles-js",{
+ particles:{
+  number:{value:110},
+  color:{value:["#00f5ff","#7b5cff"]},
+  size:{value:2},
+  line_linked:{enable:true,color:"#00f5ff",opacity:.2},
+  move:{speed:1}
+ }
+});
+
+/* GSAP */
+gsap.registerPlugin(ScrollTrigger);
+gsap.from(".card",{scrollTrigger:".card",opacity:0,y:90,stagger:.18});
+gsap.from(".title",{scrollTrigger:".title",opacity:0,x:-80});
+</script>
+</body>
+</html>
